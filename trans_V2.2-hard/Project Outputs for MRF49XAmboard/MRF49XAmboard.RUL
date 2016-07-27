@@ -1,0 +1,9 @@
+DRC Rules Export File for PCB: C:\Users\davidtrc\Desktop\TFG GLOBAL\mTrans\MRF49XAmboard.PcbDoc
+RuleKind=Clearance|RuleName=Clearance_2|Scope=Board|Minimum=-393.70
+RuleKind=Clearance|RuleName=Clearance_1|Scope=Board|Minimum=-393.70
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=7.87
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=7.87
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=4.00
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
+RuleKind=Width|RuleName=Width_VCC|Scope=Board|Minimum=11.81
+RuleKind=MinimumAnnularRing|RuleName=MinimumAnnularRing|Scope=Board|Minimum=1.97

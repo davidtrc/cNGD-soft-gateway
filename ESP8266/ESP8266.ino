@@ -82,7 +82,8 @@ void setup() {
   pinMode(NODEIN, INPUT);
   
   Serial.begin(115200);
-  WiFi.begin("B105_net", "FiNaO?16");
+  //WiFi.begin("B105_net", "FiNaO?16");
+  WiFi.begin("DEMOTFGDAVIDTRC", "DEMOTFGDAVIDTRC");
   
   while (WiFi.status() != WL_CONNECTED) {
     delay(50);

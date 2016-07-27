@@ -123,7 +123,7 @@
         // JUAN: Permanent addr is unique and is shared for all MiWi interfaces.
         /**********************************************************************/
         #if defined NODE_1
-            #define EUI_7 0x22      //CWSN-LSI, EUI_testA 
+            #define EUI_7 0x33      //CWSN-LSI, EUI_testA (22 for gateway)
         #elif defined NODE_2
             #define EUI_7 0x22      //CWSN-LSI, EUI_testB
         #elif defined NODE_NOP

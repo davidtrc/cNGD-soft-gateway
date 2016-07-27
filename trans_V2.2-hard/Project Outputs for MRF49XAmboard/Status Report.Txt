@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [MRF49XAmboard.PrjPcb]
+   Generated File[MRF49XAmboard.TXT]
+   Generated File[MRF49XAmboard.LDP]
+   Generated File[MRF49XAmboard.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 9:41:17 On 07/06/2016

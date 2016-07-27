@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [LiOnChargerShield.PrjPcb]
+   Generated File[LiOnChargerShield.TXT]
+   Generated File[LiOnChargerShield.LDP]
+   Generated File[LiOnChargerShield.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 17:19:20 On 06/06/2016

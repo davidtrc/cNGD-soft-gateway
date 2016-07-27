@@ -8,9 +8,9 @@
 #include "WirelessProtocols/ESP8266.h" //ESP8266 module
 
 #define RECEIVED_SIZE 1024
-#define SOLDER_TEST
+//#define SOLDER_TEST
 //#define BATTERY_TEST
-//#define REGULAR_NODE
+#define REGULAR_NODE
 
 #if defined SOLDER_TEST
     #if defined ENABLE_ESP8266
@@ -291,90 +291,142 @@ int mainApp(void) {
        i = WhichRIHasData();
 
        if (i & ri_RI_MASK1){
+           
            DumpRXPckt(ri1);
            i = GetRXSourceAddr(ri1, rxAddress);
-           for(i=0; i<sizeof(rxAddress); i++){
-               receivedData[i] = hexToAscii(rxAddress[i]);
-           }
-           while(GetPayloadToRead(ri1) > 0){
-               i++;
-               GetRXData(ri1, &data);
-               receivedData[i] = data;
-           }
-           HEADER_01 = 1;
-           while(HEADER_17 == 0);
-           SendViaESP8266(receivedData);
-           DelayMs(10);
-           HEADER_01 = 0;
-           DelayMs(100);
+           j=0;
+           
+            for(i=0; i<8; i++){
+                 sprintf(rxAddressASCII[i], "%02x", rxAddress[i]);
+            }
+            k=0;
+            for(i=0; i<8; i++){
+                 if(rxAddressASCII[k] != NULL){
+                     receivedData[j] = rxAddressASCII[k][0];
+                     j++;
+                     receivedData[j] = rxAddressASCII[k][1];
+                     j++;
+                     k++;
+                 }
+            }
+            while(GetPayloadToRead(ri1) > 0){
+                GetRXData(ri1, &data);
+                receivedData[j] = data;
+                j++;
+            }
+            Printf("\rReceivedData (with RX address):\r");
+            Printf(receivedData);
+            Printf("\r");
+                
+            if((receivedData[16] == '8') && (receivedData[17] == '0')){ // THE RECEIVED PACKET COMES FROM THE GATEWAY
+                HEADER_01 = 1;
+                while(HEADER_17 == 0);
+                SendViaESP8266(receivedData);
+                DelayMs(10);
+                HEADER_01 = 0;
+                DelayMs(100);
 
-           for(i=0; i< sizeof(receivedData); i++){
-               receivedData[i] = NULL;
-           }
+                for(i=0; i<RECEIVED_SIZE; i++){
+                    receivedData[i] = NULL;
+                }
+                ESP8266ClearData();
+                ESP8266ClearDataToSend();
+            } else {
+           
+            }
 
        }
        if (i & ri_RI_MASK2){
+           
            DumpRXPckt(ri2);
            i = GetRXSourceAddr(ri2, rxAddress);
-           for(i=0; i<sizeof(rxAddress); i++){
-               receivedData[i] = hexToAscii(rxAddress[i]);
-           }
-           while(GetPayloadToRead(ri2) > 0){
-               i++;
-               GetRXData(ri2, &data);
-               receivedData[i] = data;
-           }
-           HEADER_01 = 1;
-           while(HEADER_17 == 0);
-           SendViaESP8266(receivedData);
-           DelayMs(10);
-           HEADER_01 = 0;
-           DelayMs(100);
+           j=0;
+           
+           
+                for(i=0; i<8; i++){
+                     sprintf(rxAddressASCII[i], "%02x", rxAddress[i]);
+                }
+                k=0;
+                for(i=0; i<8; i++){
+                     if(rxAddressASCII[k] != NULL){
+                         receivedData[j] = rxAddressASCII[k][0];
+                         j++;
+                         receivedData[j] = rxAddressASCII[k][1];
+                         j++;
+                         k++;
+                     }
+                }
+                while(GetPayloadToRead(ri2) > 0){
+                    GetRXData(ri2, &data);
+                    receivedData[j] = data;
+                    j++;
+                }
+                Printf("\rReceivedData (with RX address):\r");
+                Printf(receivedData);
+                Printf("\r");
+            if((receivedData[16] == '8') && (receivedData[17] == '0')){ // THE RECEIVED PACKET COMES FROM THE GATEWAY
+                HEADER_01 = 1;
+                while(HEADER_17 == 0);
+                SendViaESP8266(receivedData);
+                DelayMs(10);
+                HEADER_01 = 0;
+                DelayMs(100);
 
-           for(i=0; i< sizeof(receivedData); i++){
-               receivedData[i] = NULL;
-           } 
+                for(i=0; i<RECEIVED_SIZE; i++){
+                    receivedData[i] = NULL;
+                }
+                ESP8266ClearData();
+                ESP8266ClearDataToSend();
+            } else {
+
+            }
        }
        if (i & ri_RI_MASK3){
            
            DumpRXPckt(ri3);
            i = GetRXSourceAddr(ri3, rxAddress);
            j=0;
-
-           for(i=0; i<8; i++){
-                sprintf(rxAddressASCII[i], "%02x", rxAddress[i]);
-           }
-           k=0;
-           for(i=0; i<8; i++){
-                if(rxAddressASCII[k] != NULL){
-                    receivedData[j] = rxAddressASCII[k][0];
-                    j++;
-                    receivedData[j] = rxAddressASCII[k][1];
-                    j++;
-                    k++;
-                }
-           }
-           while(GetPayloadToRead(ri3) > 0){
-               GetRXData(ri3, &data);
-               receivedData[j] = data;
-               j++;
-           }
-           Printf("ReceivedData (with RX address):\r");
-           Printf(receivedData);
-           Printf("\r");
            
-           HEADER_01 = 1;
-           while(HEADER_17 == 0);
-           SendViaESP8266(receivedData);
-           DelayMs(10);
-           HEADER_01 = 0;
-           DelayMs(100);
+           
+                for(i=0; i<8; i++){
+                     sprintf(rxAddressASCII[i], "%02x", rxAddress[i]);
+                }
+                k=0;
+                for(i=0; i<8; i++){
+                     if(rxAddressASCII[k] != NULL){
+                         receivedData[j] = rxAddressASCII[k][0];
+                         j++;
+                         receivedData[j] = rxAddressASCII[k][1];
+                         j++;
+                         k++;
+                     }
+                }
+                while(GetPayloadToRead(ri3) > 0){
+                    GetRXData(ri3, &data);
+                    receivedData[j] = data;
+                    j++;
+                }
+                Printf("\rReceivedData (with RX address):\r");
+                Printf(receivedData);
+                Printf("\r");
+                
+        if((receivedData[16] == '8') && (receivedData[17] == '0')){ // THE RECEIVED PACKET COMES FROM THE GATEWAY
+                HEADER_01 = 1;
+                while(HEADER_17 == 0);
+                SendViaESP8266(receivedData);
+                DelayMs(10);
+                HEADER_01 = 0;
+                DelayMs(100);
 
-           for(i=0; i<RECEIVED_SIZE; i++){
-               receivedData[i] = NULL;
-           }
-           //ESP8266ClearData();
-           // ESP8266ClearDataToSend();
+                for(i=0; i<RECEIVED_SIZE; i++){
+                    receivedData[i] = NULL;
+                }
+                
+                ESP8266ClearData();
+                ESP8266ClearDataToSend();
+            } else {
+
+            }
        }
        i = 0;
     }
@@ -400,47 +452,101 @@ int mainApp(void) {
 
        if (i & ri_RI_MASK1){
            DumpRXPckt(ri1);
-           i = GetRXSourceAddr(ri1, rxAddress);
-           for(i=0; i<sizeof(rxAddress); i++){
-               receivedData[i] = hexToAscii(rxAddress[i]);
-           }
-           while(GetPayloadToRead(ri1) > 0){
-               i++;
-               GetRXData(ri1, &data);
-               receivedData[i] = data;
-           }
-           decoderesult = GatewayDecodeData(receivedData, i);
-           if(decoderesult == 1){
-               GatewayExecuteChanges(ri1, rxAddress);
-               PrintInvolvedRegs();
-               Printf("\r");
-               PrintInvolvedValues();
-           } else {
+            i = GetRXSourceAddr(ri1, rxAddress);
+            j=0;
+            while(GetPayloadToRead(ri1) > 0){
+                GetRXData(ri1, &data);
+                receivedData[j] = data;
+                j++;
+            }
+            Printf("\r");
+            
+            if((receivedData[0] == '8') && (receivedData[1] == '0')){ // THE RECEIVED PACKET COMES FROM THE GATEWAY
                
-           }
-
-           for(i=0; i< sizeof(receivedData); i++){
-               receivedData[i] = NULL;
-           }
+                for(i=0; i<(RECEIVED_SIZE-2); i++){
+                    receivedData[i] = receivedData[i+2];
+                }
+                checkHex = GatewayCheckHex(receivedData, ri1, rxAddress);
+                if(checkHex){
+                     decoderesult = GatewayDecodeData(receivedData, i);
+                     if(decoderesult){
+                         Printf("Packet is correct. Making the requested operations...\r");
+                         PrintInvolvedRegs();
+                         Printf("\r");
+                         PrintInvolvedValues();
+                         Printf("\r");
+                         sendresult = GatewayExecuteChanges(ri1, rxAddress);
+                         if(sendresult){
+                             Printf("Data sent\r");
+                         } else {
+                             Printf("Failure sending data\r");
+                         }
+                     } else {
+                         Printf("Packet has errors. Discarded\r");
+                     }
+                     decoderesult = 0;
+                     sendresult = 0;
+                     checkHex = 0;
+                 }
+                 for(i=0; i<RECEIVED_SIZE; i++){
+                     receivedData[i] = NULL;
+                 }
+                 GatewayClearData(ri1, rxAddress);
+                 GatewayCheckTimers(ri1, rxAddress);
+                 GatewayCheckChanges(ri1, rxAddress);
+            } else {
+                //PROCESS PACKET FOR OTHERS IMPLEMENTATIONS
+                
+            }
 
        } else if (i & ri_RI_MASK2){
            DumpRXPckt(ri2);
-           i = GetRXSourceAddr(ri2, rxAddress);
-           for(i=0; i<sizeof(rxAddress); i++){
-               receivedData[i] = hexToAscii(rxAddress[i]);
-           }
-           while(GetPayloadToRead(ri2) > 0){
-               i++;
-               GetRXData(ri2, &data);
-               receivedData[i] = data;
-           }
-           GatewayDecodeData(receivedData, i);
-           PrintInvolvedRegs();
-           PrintInvolvedValues();
-
-           for(i=0; i< sizeof(receivedData); i++){
-               receivedData[i] = NULL;
-           } 
+            i = GetRXSourceAddr(ri2, rxAddress);
+            j=0;
+            while(GetPayloadToRead(ri2) > 0){
+                GetRXData(ri2, &data);
+                receivedData[j] = data;
+                j++;
+            }
+            Printf("\r");
+            
+            if((receivedData[0] == '8') && (receivedData[1] == '0')){ // THE RECEIVED PACKET COMES FROM THE GATEWAY
+               
+                for(i=0; i<(RECEIVED_SIZE-2); i++){
+                    receivedData[i] = receivedData[i+2];
+                }
+                checkHex = GatewayCheckHex(receivedData, ri2, rxAddress);
+                if(checkHex){
+                     decoderesult = GatewayDecodeData(receivedData, i);
+                     if(decoderesult){
+                         Printf("Packet is correct. Making the requested operations...\r");
+                         PrintInvolvedRegs();
+                         Printf("\r");
+                         PrintInvolvedValues();
+                         Printf("\r");
+                         sendresult = GatewayExecuteChanges(ri2, rxAddress);
+                         if(sendresult){
+                             Printf("Data sent\r");
+                         } else {
+                             Printf("Failure sending data\r");
+                         }
+                     } else {
+                         Printf("Packet has errors. Discarded\r");
+                     }
+                     decoderesult = 0;
+                     sendresult = 0;
+                     checkHex = 0;
+                 }
+                 for(i=0; i<RECEIVED_SIZE; i++){
+                     receivedData[i] = NULL;
+                 }
+                 GatewayClearData(ri2, rxAddress);
+                 GatewayCheckTimers(ri2, rxAddress);
+                 GatewayCheckChanges(ri2, rxAddress);
+            } else {
+                //PROCESS PACKET FOR OTHERS IMPLEMENTATIONS
+                
+            } 
        } else if (i & ri_RI_MASK3){
             DumpRXPckt(ri3);
             i = GetRXSourceAddr(ri3, rxAddress);

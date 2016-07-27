@@ -33,7 +33,7 @@
 #define BOOTLOADER 0xF
 
 #define TABLE_SIZE 50
-#define PACKET_SIZE 2048
+#define PACKET_SIZE 1024
 
 #define DEBUG
 
@@ -56,6 +56,7 @@ static unsigned char packetToSend[PACKET_SIZE];
 static unsigned char regValueASCII[7][9];
 static unsigned char traces[63][8];
 static UINT32 timeelapsed = 0;
+static unsigned char packetToSendTemp[1026];
 
 /*******************************************************************************
 * Function:         UINT8 GatewayCheckHex(char* receivedData, radioInterface rix, BYTE address[8])
@@ -964,6 +965,22 @@ UINT8 formatPacket(UINT8 packetType, UINT8 numberOfChars, char char1, char char2
             Printf("Invalid numberOfChars\r");
             return 0;
     }
+    
+    packetToSendTemp[0] = '8';
+    packetToSendTemp[1] = '0';
+
+    for(i=0; i<PACKET_SIZE; i++){
+        if(packetToSend[i] != NULL){
+            packetToSendTemp[i+2] = packetToSend[i];
+        }
+    }
+
+    for(i=0; i<1024; i++){
+        if(packetToSendTemp[i] != NULL){
+            packetToSend[i] = packetToSendTemp[i];
+        }
+    }
+    
     PrintPacketToSend();
     return 1;
 }
@@ -1077,7 +1094,11 @@ void GatewayClearData(void){
     }
     for(i=0; i<sizeof(packetToSend); i++){
         packetToSend[i] = NULL;
+        packetToSendTemp[i] = NULL;
     }
+    
+    packetToSendTemp[PACKET_SIZE] = NULL;
+    packetToSendTemp[PACKET_SIZE+1] = NULL;
     
 }
 

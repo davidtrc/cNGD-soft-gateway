@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: MRF49XAmboard.PcbDoc   07/06/2016  9:41:17
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : MRF49XAmboard.TXT
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        0.3mm (11.811mil)        Round          28               104.26 mm (4.10 Inch)
+T2        0.35mm (13.78mil)        Round          1                0.00 mm (0.00 Inch)
+T3        0.4mm (15.748mil)        Round          12               14.35 mm (0.56 Inch)
+T4        1.2mm (47.244mil)        Round          12               58.42 mm (2.30 Inch)
+T5        1.6mm (62.992mil)        Round          1                0.00 mm (0.00 Inch)
+T6        1.7mm (66.929mil)        Round          4                15.24 mm (0.60 Inch)
+---------------------------------------------------------------------------
+Totals                                            58               192.27 mm (7.57 Inch)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

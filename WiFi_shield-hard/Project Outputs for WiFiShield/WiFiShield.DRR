@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: WiFiShield.PcbDoc   06/06/2016  14:41:13
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : WiFiShield.TXT
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        0.65mm (25.591mil)       Round          40               153.29 mm (6.04 Inch)
+T2        0.7112mm (28mil)         Round          23               152.07 mm (5.99 Inch)
+T3        0.762mm (30mil)          Round          5                18.02 mm (0.71 Inch)
+T4        0.9mm (35.433mil)        Round          12               84.17 mm (3.31 Inch)
+---------------------------------------------------------------------------
+Totals                                            80               407.54 mm (16.05 Inch)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

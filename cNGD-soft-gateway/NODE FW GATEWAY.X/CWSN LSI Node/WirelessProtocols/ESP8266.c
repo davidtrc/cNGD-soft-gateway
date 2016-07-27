@@ -1298,12 +1298,6 @@ UINT8 ESP8266SendCommands(BYTE lessNoisyChannel, radioInterface rx){
                 k++;
             }
         }
-        for(i=0; i<sizeof(value); i++){
-            if(value[i] != NULL){
-                packetToSend[k+3] = value[i];
-                k++;
-            }
-        }
         
         packetToSendTemp[0] = '8';
         packetToSendTemp[1] = '0';
@@ -1319,7 +1313,6 @@ UINT8 ESP8266SendCommands(BYTE lessNoisyChannel, radioInterface rx){
                 packetToSend[i] = packetToSendTemp[i];
             }
         }
-        
         
         Printf("Packet to send formatted as: ");
         Printf(packetToSend);
